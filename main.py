@@ -104,24 +104,8 @@ def readFile(file):
     line = temp.readline()
   return params
 
-def edgesCreator(x, y, dens):
-  selected = []
-  quantity = int((x * y)* (dens/100))
-  edges = [(a,b) for a in range(x) for b in range(y)]
-  
-  for i in range(quantity):
-    a,b  = random.choice(edges)
-    print("a,b: ",(a,b))
-    print("b,a: ",(b,a))  
-    
-    selected.append((a,b))
-    edges.remove((a,b))
-
-  return selected
-
 # Exemplo de uso:
 entrada = readFile("entrada.txt")
-print(edgesCreator(entrada[0],entrada[1],entrada[2]))
 
 # Exemplo de uso:
 #edges = [(1, 8), (1, 9), (3, 7), (3, 10), (4, 9), (5, 9), (5, 10), (6, 12)]
