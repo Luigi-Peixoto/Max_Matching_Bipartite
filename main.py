@@ -96,20 +96,32 @@ class BipartiteGraph :
             self.matching[v] = u
 
 def readFile(file):
-  params = []
+  edges = []
   temp = open(file)
   line = temp.readline()
   while line:
-    params.append(int(line))
+
+    edges.append(eval(line))
     line = temp.readline()
-  return params
+  temp.close()
+  return edges
 
+def resultFile(maxMatching, matching):
+  j = 0
+  with open("results.txt", "w") as file:
+    file.write("RESULTADOS OBTIDOS:")
+    file.write(f"O tamanho do emparelhamento maximo: {maxMatching}\n")
+    file.write("Emparelhamentos:\n")
+    for i in matching:
+      j = j + 1
+      file.write(f"{i} ")
+      if j % 2 == 0:
+        file.write("\n")
+      
 # Exemplo de uso:
-entrada = readFile("entrada.txt")
-
-# Exemplo de uso:
-#edges = [(1, 8), (1, 9), (3, 7), (3, 10), (4, 9), (5, 9), (5, 10), (6, 12)]
-#graph = BipartiteGraph(edges)
-#max_matching = graph.max_matching()
-#print("O tamanho do emparelhamento máximo é:", max_matching)
-#print("Emparelhamentos:", graph.matching)
+edges = readFile("instance.txt")
+graph = BipartiteGraph(edges)
+max_matching = graph.max_matching()
+resultFile(max_matching,graph.matching)
+print("O tamanho do emparelhamento máximo é:", max_matching)
+print("Emparelhamentos:", graph.matching)
