@@ -1,3 +1,4 @@
+import random
 class BipartiteGraph :
   def __init__(self, edges) :
     self.edges = edges
@@ -94,9 +95,28 @@ class BipartiteGraph :
             self.matching[u] = v
             self.matching[v] = u
 
+def readFile(file):
+  params = []
+  temp = open(file)
+  line = temp.readline()
+  while line:
+    params.append(int(line))
+    line = temp.readline()
+  return params
+
+def edgesCreator(x, y, dens):
+  quantity = int((x * y)* (dens/100))
+  edges = [(a, b) for a in range(x) for b in range(y)]
+  selected = random.sample(edges,quantity)
+  return selected
+
 # Exemplo de uso:
-edges = [(1, 8), (1, 9), (3, 7), (3, 10), (4, 9), (5, 9), (5, 10), (6, 12)]
-graph = BipartiteGraph(edges)
-max_matching = graph.max_matching()
-print("O tamanho do emparelhamento máximo é:", max_matching)
-print("Emparelhamentos:", graph.matching)
+entrada = readFile("entrada.txt")
+print(edgesCreator(entrada[0],entrada[1],entrada[2]))
+
+# Exemplo de uso:
+#edges = [(1, 8), (1, 9), (3, 7), (3, 10), (4, 9), (5, 9), (5, 10), (6, 12)]
+#graph = BipartiteGraph(edges)
+#max_matching = graph.max_matching()
+#print("O tamanho do emparelhamento máximo é:", max_matching)
+#print("Emparelhamentos:", graph.matching)
