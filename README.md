@@ -1,7 +1,7 @@
-#About the project
+ #About the project
  Code in python to find the max matching in a Bipartite Graph
 
-#How to use
+ #How to use
 First, make sure you have python installed in your system and IDE.
 In the main.py execution, you will need the "instance.txt", you can make this file manually or you can execute the instance_generator to make this file.
 The instance generator needs 3 parameters: 1º number of candidates, 2º number of vacancies and 3º Density of Graph. It will build a "instance.txt" with the random edges based in the parameters. 
