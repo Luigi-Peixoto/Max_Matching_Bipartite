@@ -105,9 +105,18 @@ def readFile(file):
   return params
 
 def edgesCreator(x, y, dens):
+  selected = []
   quantity = int((x * y)* (dens/100))
-  edges = [(a, b) for a in range(x) for b in range(y)]
-  selected = random.sample(edges,quantity)
+  edges = [(a,b) for a in range(x) for b in range(y)]
+  
+  for i in range(quantity):
+    a,b  = random.choice(edges)
+    print("a,b: ",(a,b))
+    print("b,a: ",(b,a))  
+    
+    selected.append((a,b))
+    edges.remove((a,b))
+
   return selected
 
 # Exemplo de uso:
