@@ -110,7 +110,7 @@ def resultText(maxMatching, matching) :
   
   result += "## RESULTADOS OBTIDOS: \n\n"
   result += f"Cardinalidade do emparelhamento máximo: {maxMatching}\n"
-  result += "Arestas emparelhadas: \n"
+  result += "Vértices emparelhados: \n"
   
   j = 0 
   for i in matching:
