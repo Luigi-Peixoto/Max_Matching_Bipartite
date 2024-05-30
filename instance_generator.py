@@ -24,8 +24,8 @@ def instanceCreator(edges):
       file.write(line)
 
 
-quantC = input("Digite a quantidade de Candidatos: ")
-quantV = input("Digite a quantidade de Vagas: ")
-dens = input("Digite a Densidade do grafo (sem '%'): ")
+quantC = input("Digite a ordem do conjunto C: ")
+quantV = input("Digite a ordem do conjunto V: ")
+dens = input("Digite a densidade do grafo (sem '%'): ")
 edges = edgesCreator(quantC, quantV, dens)
 instanceCreator(edges)

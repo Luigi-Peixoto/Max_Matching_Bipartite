@@ -1,4 +1,3 @@
-import random
 class BipartiteGraph :
   def __init__(self, edges) :
     self.edges = edges
@@ -31,7 +30,7 @@ class BipartiteGraph :
   def find_augmenting_path(self) :
     F = []
 
-    #iniciar arvores em F
+    # iniciar arvores em F
     for v in self.adj_list :
       if v not in self.matching :
         self.parent[v] = None
@@ -41,23 +40,23 @@ class BipartiteGraph :
     marked_vertices = []
     marked_edges = []
 
-    #marcar arestas do matching
+    # marcar arestas do matching
     for u, v in self.matching.items() :
       marked_edges.append((u, v))
       marked_edges.append((v, u))
 
-    #enquanto tem vertice não marcado dist par da raiz
+    # enquanto tem vertice não marcado dist par da raiz
     for v in F:
       if v not in marked_vertices and self.dist[v] % 2 == 0 :
 
-        #enquanto existir aresta não marcada (v, w)
+        # enquanto existir aresta não marcada (v, w)
         for w in self.adj_list[v] :
           if (v, w) not in marked_edges:
 
             if w not in F :
-              #então w não é vértice simples
+              # então w não é vértice simples
               x = self.matching[w]
-              #add (v, w) e (w, x) à árvore de v
+              # add (v, w) e (w, x) à árvore de v
               self.parent[w] = v
               self.parent[x] = w
               self.dist[w] = self.dist[v] + 1
@@ -91,7 +90,7 @@ class BipartiteGraph :
     for i in range(0, len(path) - 1, 2):
             u = path[i]
             v = path[i + 1]
-            # Alterna o emparelhamento
+            # alterna o emparelhamento
             self.matching[u] = v
             self.matching[v] = u
 
@@ -106,22 +105,30 @@ def readFile(file):
   temp.close()
   return edges
 
-def resultFile(maxMatching, matching):
-  j = 0
-  with open("results.txt", "w") as file:
-    file.write("RESULTADOS OBTIDOS:")
-    file.write(f"O tamanho do emparelhamento maximo: {maxMatching}\n")
-    file.write("Emparelhamentos:\n")
-    for i in matching:
+def resultText(maxMatching, matching) :
+  result = ""
+  
+  result += "## RESULTADOS OBTIDOS: \n\n"
+  result += f"Cardinalidade do emparelhamento máximo: {maxMatching}\n"
+  result += "Arestas emparelhadas: \n"
+  
+  j = 0 
+  for i in matching:
       j = j + 1
-      file.write(f"{i} ")
+      result += f"{i} "
       if j % 2 == 0:
-        file.write("\n")
+        result += ("\n")
+
+  return result
+
+def writeFile(string) :
+  with open("results.txt", "w") as file:
+    file.write(string)
       
-# Exemplo de uso:
 edges = readFile("instance.txt")
 graph = BipartiteGraph(edges)
 max_matching = graph.max_matching()
-resultFile(max_matching,graph.matching)
-print("O tamanho do emparelhamento máximo é:", max_matching)
-print("Emparelhamentos:", graph.matching)
+
+result = resultText(max_matching, graph.matching)
+writeFile(result)
+print(result)
