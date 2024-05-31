@@ -1,3 +1,4 @@
+import time
 class BipartiteGraph :
   def __init__(self, edges) :
     self.edges = edges
@@ -105,7 +106,7 @@ def readFile(file):
   temp.close()
   return edges
 
-def resultText(maxMatching, matching) :
+def resultText(maxMatching, matching, time) :
   result = ""
   
   result += "## RESULTADOS OBTIDOS: \n\n"
@@ -118,17 +119,19 @@ def resultText(maxMatching, matching) :
       result += f"{i} "
       if j % 2 == 0:
         result += ("\n")
-
+  result += f"Tempo de execução: {time} milissegundos"
   return result
 
 def writeFile(string) :
   with open("results.txt", "w") as file:
     file.write(string)
-      
+
+start = time.time()      
 edges = readFile("instance.txt")
 graph = BipartiteGraph(edges)
 max_matching = graph.max_matching()
-
-result = resultText(max_matching, graph.matching)
+end = time.time()
+time = (end - start) * 1000
+result = resultText(max_matching, graph.matching, str(round(time,3)))
 writeFile(result)
 print(result)
